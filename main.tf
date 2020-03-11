@@ -57,6 +57,6 @@ resource "helm_release" "helm_deployment" {
   recreate_pods = "${local.recreate_pods}"
 
   values = [
-    "${template_file.chart_values_template.rendered}",
+    "${data.template_file.chart_values_template.rendered}",
   ]
 }
