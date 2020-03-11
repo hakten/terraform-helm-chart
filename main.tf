@@ -37,6 +37,9 @@ data "template_file" "chart_values_template" {
 
 ## local_file.deployment_values will create the file output path.module/.cache/values.yaml
 resource "local_file" "deployment_values" {
+  depends_on = [
+    "helm_release.helm_deployment"
+  ]
   content  = "${trimspace(data.template_file.chart_values_template.rendered)}"
   filename = "charts/.cache/${var.deployment_name}-values.yaml"
 }
